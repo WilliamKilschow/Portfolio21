@@ -7,9 +7,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class Controller extends Main{
+import java.sql.SQLException;
 
-    // TrainModel m = TrainModel.getInstance();
+
+public class Controller {
+
+     Model m = Model.getInstance();
+
 
     @FXML
     TextField stat1;
@@ -21,8 +25,10 @@ public class Controller extends Main{
     Button btn;
     @FXML
     TextArea res;
-    @FXML
-    ComboBox stat3;
+
+
+    public Controller() throws SQLException {
+    }
 
     /*Controller() {
 
@@ -34,7 +40,7 @@ public class Controller extends Main{
     }*/
 
     public void routeHandler(ActionEvent e) {
-
+        m.getConnection(stat1.getText(), stat2.getText());
         System.out.println("Søg");
         res.setText(findRoute(stat1.getText(), stat2.getText(), time.getText()));
 
@@ -53,3 +59,5 @@ public class Controller extends Main{
     }
 
 }
+
+

@@ -1,5 +1,4 @@
 package sample;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,10 +9,8 @@ import java.sql.*;
 import java.util.Scanner;
 
 
-
-
-public class Main extends Application  {
-    public  JDBCConnection retriever;
+public class Main extends Application {
+    //public JDBCConnection retriever;
 
 
     @Override
@@ -23,17 +20,14 @@ public class Main extends Application  {
         primaryStage.setScene(new Scene(root, 350, 500));
         primaryStage.show();
 
-         retriever = new JDBCConnection();
-        //Connection er en del af SQLlib
-        Connection conn = null;
 
-        try {
+
+        /*try {
 
             String url = "jdbc:sqlite:/Users/williamkilschowpetersen/Documents/5. Semester RUC/Software Development/databaser/TravelersFriend1.db";
-            //Connection objektet, retriever, skaber adgang til databasen
-            conn = retriever.connect(url);
+          //  //Connection objektet, retriever, skaber adgang til databasen
+           conn = retriever.connect(url);
             System.out.println("you have reached connection");
-
 
 
             System.out.println("At which station do you wish to depart?");
@@ -54,7 +48,7 @@ public class Main extends Application  {
 
         /*Hvis der opstår en fejl med forbindelsen til
          databasen bliver stacktrace printet, så fejlen kan findes*/
-        } catch (SQLException e) {
+        /* } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             //Lukker vores connection
@@ -65,12 +59,11 @@ public class Main extends Application  {
                     e.printStackTrace();
                 }
             }
-        }
+        } */
 
     }
 
     public static void main(String[] args) {
-
 
         launch(args);
 
