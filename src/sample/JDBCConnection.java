@@ -1,11 +1,10 @@
 package sample;
 
-import sample.Main;
-
 import java.sql.*;
-import java.util.Scanner;
 
 public class JDBCConnection {
+
+    private String message;
 
     public Connection connect(String url)
             throws SQLException {
@@ -38,16 +37,22 @@ public class JDBCConnection {
     }
 
 
-    public void PresentRoute(ResultSet res)
+    public String PresentRoute(ResultSet res)
             throws SQLException {
+
         if (res == null)
             System.out.println("No records");
+
         while (res != null & res.next()) {
+
             String foundRoute = res.getString("Route");
             String foundDepartureTime = res.getString("DepTime");
-            System.out.println(foundRoute + " " + foundDepartureTime);
-        }
-    }
+            //System.out.println(foundRoute + " " + foundDepartureTime);
+            message = (foundRoute + " " + foundDepartureTime);
 
+
+        }
+      return message;
+    }
 
 }
