@@ -45,6 +45,7 @@ public class Controller {
         ResultSet result = m.retriever.plainstatement(stat1.getText(), conn);
         res.setText(m.retriever.PresentRoute(result));                                          //Viser den fundne data i tekstfeltet i vores GUI
         System.out.println(m.retriever.PresentRoute(pres));                                     //Printer den fundne data ud i konsollen.
+        conn.close();
     }
 
 
