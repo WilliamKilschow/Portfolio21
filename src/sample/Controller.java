@@ -34,6 +34,7 @@ public class Controller {
 
 
     public void routeHandler(ActionEvent e) throws SQLException {
+
         String url = "jdbc:sqlite:/Users/williamkilschowpetersen/Documents/5. Semester RUC/Software Development/databaser/TravelersFriend1.db";
         conn = m.retriever.connect(url);                                                        //Connection objektet, retriever, skaber adgang til databasen
         System.out.println("you have reached connection");                                      //Fortæller os at forbindelsen er opnået
