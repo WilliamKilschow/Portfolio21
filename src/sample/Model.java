@@ -1,24 +1,25 @@
 package sample;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
-
+/**
+ * En singleton klasse til vores JDBC objekt, så vi kun har en forbindelse til databasen.
+ */
 class Model {
 
     public JDBCConnection retriever;
-    Connection conn;
-    //Connection er en del af SQLlib
 
-
-    //Constructor
-    private Model() {
+    private Model() {                                                                                                    //Constructor
         retriever = new JDBCConnection();
     }
 
     static Model inst;
 
-    static Model getInstance() throws SQLException {
+    /**
+     * Metode der sikrer sig at der kun kan være et objekt af denne klasse.
+     * @return Model
+     */
+    static Model getInstance()  {
         if (inst == null) {
             inst = new Model();
         }
