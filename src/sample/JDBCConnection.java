@@ -49,10 +49,8 @@ public class JDBCConnection {
             String foundDepartureTime = res.getString("DepTime");
             //System.out.println(foundRoute + " " + foundDepartureTime);
             message = (foundRoute + " " + foundDepartureTime);
-
-
         }
-      return message;
+        return message;
     }
 
 }
