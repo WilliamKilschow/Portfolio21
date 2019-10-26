@@ -3,16 +3,18 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class Controller {
-
-     Model m = Model.getInstance();
+                                                                                                //Skaber et object af JDBC connection
+    Model m = Model.getInstance();
+    Connection conn;
 
 
     @FXML
@@ -30,33 +32,23 @@ public class Controller {
     public Controller() throws SQLException {
     }
 
-    /*Controller() {
 
-        for (String s : TrainModel.getInstance().getStations()) {
+    public void routeHandler(ActionEvent e) throws SQLException {
 
-            stat3.getItems().add(s);
-
-        }
-    }*/
-
-    public void routeHandler(ActionEvent e) {
-        m.getConnection(stat1.getText(), stat2.getText());
-        System.out.println("Søg");
-        res.setText(findRoute(stat1.getText(), stat2.getText(), time.getText()));
-
+        String url = "jdbc:sqlite:/Users/williamkilschowpetersen/Documents/5. Semester RUC/Software Development/databaser/TravelersFriend1.db";
+        conn = m.retriever.connect(url);                                                        //Connection objektet, retriever, skaber adgang til databasen
+        System.out.println("you have reached connection");                                      //Fortæller os at forbindelsen er opnået
+        PreparedStatement Feedback = m.retriever.selectpreparedstatement(conn);                 //Kører vores selectpreparedstatement fra JDBCConnection
+        Feedback.setString(1, stat1.getText());                                  //Sørger for at den indtastede station i GUI får den rigtige placering i vores query
+        Feedback.setString(2, stat2.getText());
+        ResultSet pres = Feedback.executeQuery();                                               //Resultatet er vores preparedstatement som henter vores eksekverede query
+        m.retriever.PresentRoute(pres);                                                         //Vores JDBC objekt præsenterer den indsamlede data
+        ResultSet result = m.retriever.plainstatement(stat1.getText(), conn);
+        res.setText(m.retriever.PresentRoute(result));                                          //Viser den fundne data i tekstfeltet i vores GUI
+        System.out.println(m.retriever.PresentRoute(pres));                                     //Printer den fundne data ud i konsollen.
+        conn.close();
     }
 
-
-    String[] getStations() {
-
-        String[] s = new String[]{"København", "Roskilde", "Odense"};
-        return s;
-    }
-
-    public String findRoute(String stat1, String stat2, String time) {
-
-        return "Rute fra " + stat1 + "\ntil " + stat2 + " kl. " + time;
-    }
 
 }
 
